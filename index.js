@@ -1,24 +1,31 @@
-var list = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-    23, 24, 25, 26, 27, 28, 29, 30,
-];
+const array = [1,4,2,5,3,6,4,7,5,8,6,9,7,0,9,10,15,12,11]
 
-var binary_search = function (list, target) {
-    var start = 0;
-    var end = list.length - 1;
-    var middle;
-    for (var index = 0; start <= end; index++) {
-        middle = Math.floor((end - start) / 2) + start;
-        if (target < list[middle]) {
-            end = middle - 1;
-        }
-        else if (target > list[middle]) {
-            start = middle + 1;
-        }
-        else if (target === list[middle]) {
-            return middle;
+
+const find_smallest = (arr) => {
+    let smallest_index = 0
+    let smallest = arr[smallest_index]
+    for (let index = 1; index < arr.length; index++) {
+        if (arr[index] < smallest) {
+            smallest = arr[index]
+            smallest_index = index
         }
     }
-    
-};
-console.log(binary_search(list, 3));
+    return smallest_index
+}
+
+const selected_sort = (arr) => {
+   const array_copy = [...arr]
+   const new_filtered_array = []
+
+   for (let index = 0; index < arr.length; index++) {
+       const smallest_index =  find_smallest(array_copy)
+       new_filtered_array.push(array_copy[smallest_index])
+       array_copy.splice(smallest_index,1)
+   }
+
+   return new_filtered_array
+}
+
+
+
+console.log(selected_sort(array));
